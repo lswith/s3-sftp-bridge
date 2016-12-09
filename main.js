@@ -27,6 +27,7 @@ exports.pollSftp = function(event, context) {
       }
     }
     if (streamNames.length == 0) throw new Error("streamNames required for config discovery")
+    if (streamNames.length != 1) throw new Error("there must only be 1 streamName configured")
     return conf.getConfigAsync(context)
     .then(function(config) {
       return Promise.map(

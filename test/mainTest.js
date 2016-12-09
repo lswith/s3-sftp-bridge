@@ -48,8 +48,8 @@ describe('main', function() {
     });
 
     it('should direct to newS3Object when applicable', function() {
-      var s3Event = {  
-        "Records": [  
+      var s3Event = {
+        "Records": [
           {
             "s3": {
               "bucket": {
@@ -126,42 +126,14 @@ describe('main', function() {
         }
       );
     });
-
-    it('should copy multiple files in the same resource', function() {
-      testHelper.s3.objects["aws.lambda.us-east-1.1234567890.config/test.json"] = '{"test-stream1":{"sftpLocation":"dir","sftpConfig":{},"s3Location":"my-bucket1"},"test-stream2":{"sftpLocation":"foo","sftpConfig":{},"s3Location":"my-bucket2"}}';
-      testHelper.sftp.objects['dir/my-file.txt'] = 'Hello World 1!';
-      testHelper.sftp.objects['foo/my-file.txt'] = 'Hello World 2!';
-      return testHelper.assertContextSuccess(
-        main.pollSftp({resources: ["arn:aws:events:us-east-1:1234567890:rule/test-stream1.test-stream2"]}, ctx),
-        ctx,
-        function(results) {
-          assert.equal(testHelper.s3.objects['my-bucket1/my-file.txt'], 'Hello World 1!');
-          assert.equal(testHelper.s3.objects['my-bucket2/my-file.txt'], 'Hello World 2!');
-        }
-      );
-    });
-
-    it('should copy multiple files in different resources', function() {
-      testHelper.s3.objects["aws.lambda.us-east-1.1234567890.config/test.json"] = '{"test-stream1":{"sftpLocation":"dir","sftpConfig":{},"s3Location":"my-bucket1"},"test-stream2":{"sftpLocation":"foo","sftpConfig":{},"s3Location":"my-bucket2"}}';
-      testHelper.sftp.objects['dir/my-file.txt'] = 'Hello World 1!';
-      testHelper.sftp.objects['foo/my-file.txt'] = 'Hello World 2!';
-      return testHelper.assertContextSuccess(
-        main.pollSftp({resources: ["arn:aws:events:us-east-1:1234567890:rule/test-stream1", "arn:aws:events:us-east-1:1234567890:rule/test-stream2"]}, ctx),
-        ctx,
-        function(results) {
-          assert.equal(testHelper.s3.objects['my-bucket1/my-file.txt'], 'Hello World 1!');
-          assert.equal(testHelper.s3.objects['my-bucket2/my-file.txt'], 'Hello World 2!');
-        }
-      );
-    });
   });
 
   describe('#newS3Object()', function() {
     var s3Event;
 
     beforeEach(function() {
-      s3Event = {  
-        "Records": [  
+      s3Event = {
+        "Records": [
           {
             "s3": {
               "bucket": {
