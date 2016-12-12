@@ -2,7 +2,7 @@
   "name": "s3-sftp-bridge",
   "version": "0.0.0",
   "description": "A small Lambda app that syncs files between Amazon S3 and external FTP servers",
-  "main": "index.js",
+  "main": "main.js",
   "directories": {
     "test": "test"
   },
