@@ -1,6 +1,6 @@
 var AWS = require('aws-sdk'),
     Promise = require('bluebird')
-    conf = Promise.promisifyAll(require('aws-lambda-config')),
+    conf = Promise.promisifyAll(require('./lib/configHelper')),
     s3 = Promise.promisifyAll(require('node-s3-encryption-client')),
     awsS3 = Promise.promisifyAll(new AWS.S3()),
     sftpHelper = require('./lib/sftpHelper'),

@@ -84,7 +84,7 @@ exports.s3 = {
         object = object.substr(parseInt(matches[1]), parseInt(matches[2]));
       }
     }
-    
+
     if (object) {
       callback(null, {Body: new Buffer(object), ContentLength: object.length, Metadata: this.metadata[fullKey] });
     } else {
@@ -94,7 +94,7 @@ exports.s3 = {
   'headObject': function(params, callback) {
     var fullKey = params.Bucket + "/" + params.Key;
     var object = this.objects[fullKey];
-    
+
     if (object) {
       callback(null, { ContentLength: object.length, Metadata: this.metadata[fullKey] });
     } else {
