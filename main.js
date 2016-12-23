@@ -264,7 +264,6 @@ exports.syncSftpDir = function(sftp, sftpDir, s3Location, fileRetentionDays, top
                 }
               })
               .then(function(data) {
-                console.info("...done");
                 return data;
               });
             });
